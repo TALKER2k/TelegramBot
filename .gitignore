@@ -1,0 +1,6 @@
+.idea
+/logs
+dispatcher/target
+
+# Project exclude paths
+/common-rabbitmq/target/
