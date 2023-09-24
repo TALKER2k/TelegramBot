@@ -13,7 +13,7 @@ public class AnswerConsumerImpl implements AnswerConsumer {
     private final UpdateProcessor updateProcessor;
 
     public AnswerConsumerImpl(UpdateProcessor updateProcessor) {
-	this.updateProcessor = updateProcessor;
+        this.updateProcessor = updateProcessor;
     }
 
     @Override

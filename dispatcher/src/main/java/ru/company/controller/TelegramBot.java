@@ -20,7 +20,7 @@ public class TelegramBot extends TelegramLongPollingBot {
     private final UpdateProcessor updateProcessor;
 
     public TelegramBot(UpdateProcessor updateProcessor) {
-	this.updateProcessor = updateProcessor;
+        this.updateProcessor = updateProcessor;
     }
 
     @PostConstruct
@@ -30,12 +30,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-	return botName;
+        return botName;
     }
 
     @Override
     public String getBotToken() {
-	return botToken;
+        return botToken;
     }
 
     public void sendAnswerMessage(SendMessage message) {

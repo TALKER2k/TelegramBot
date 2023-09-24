@@ -17,8 +17,8 @@ public class UpdateProcessor {
     private final UpdateProducer updateProducer;
 
     public UpdateProcessor(MessageUtils messageUtils, UpdateProducer updateProducer) {
-	this.messageUtils = messageUtils;
-	this.updateProducer = updateProducer;
+        this.messageUtils = messageUtils;
+        this.updateProducer = updateProducer;
     }
 
     public void registerBot(TelegramBot telegramBot) {
@@ -29,38 +29,38 @@ public class UpdateProcessor {
         if (update == null) {
             log.error("Received update is null");
             return;
-	}
+        }
 
         if (update.hasMessage()) {
             distributeMessagesByType(update);
-	} else {
+        } else {
             log.error("Unsupported message type is received: " + update);
-	}
+        }
     }
 
     private void distributeMessagesByType(Update update) {
         var message = update.getMessage();
         if (message.hasText()) {
             processTextMessage(update);
-	} else if (message.hasDocument()) {
+        } else if (message.hasDocument()) {
             processDocMessage(update);
-	} else if (message.hasPhoto()) {
+        } else if (message.hasPhoto()) {
             processPhotoMessage(update);
-	} else {
+        } else {
             setUnsupportedMessageTypeView(update);
-	}
+        }
     }
 
     private void setUnsupportedMessageTypeView(Update update) {
         var sendMessage = messageUtils.generateSendMessageWithText(update,
-			"Неподдерживаемый тип сообщения!");
+                "Неподдерживаемый тип сообщения!");
         setView(sendMessage);
     }
 
     private void setFileIsReceivedView(Update update) {
-	var sendMessage = messageUtils.generateSendMessageWithText(update,
-			"Файл получен! Обрабатывается...");
-	setView(sendMessage);
+        var sendMessage = messageUtils.generateSendMessageWithText(update,
+                "Файл получен! Обрабатывается...");
+        setView(sendMessage);
     }
 
     public void setView(SendMessage sendMessage) {
@@ -68,13 +68,13 @@ public class UpdateProcessor {
     }
 
     private void processPhotoMessage(Update update) {
-	updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
-	setFileIsReceivedView(update);
+        updateProducer.produce(PHOTO_MESSAGE_UPDATE, update);
+        setFileIsReceivedView(update);
     }
 
     private void processDocMessage(Update update) {
-	updateProducer.produce(DOC_MESSAGE_UPDATE, update);
-	setFileIsReceivedView(update);
+        updateProducer.produce(DOC_MESSAGE_UPDATE, update);
+        setFileIsReceivedView(update);
     }
 
     private void processTextMessage(Update update) {
