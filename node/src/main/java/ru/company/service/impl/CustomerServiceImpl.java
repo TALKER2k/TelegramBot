@@ -33,12 +33,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @RabbitListener(queues = DOC_MESSAGE_UPDATE)
     public void consumeDocMessageUpdates(Update update) {
-
+        mainService.processDocMessage(update);
     }
 
     @Override
     @RabbitListener(queues = PHOTO_MESSAGE_UPDATE)
     public void consumePhotoMessageUpdates(Update update) {
-
+        mainService.processPhotoMessage(update);
     }
 }
